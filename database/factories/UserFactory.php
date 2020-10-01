@@ -1,7 +1,9 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Post;
 use App\User;
+use App\Category;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -24,4 +26,24 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
     ];
+    
+});
+
+$factory->define(Category::class, function (Faker $faker) {
+    return [
+        'cat_name' => $faker->word,
+    ];
+    
+});
+
+$factory->define(Post::class, function (Faker $faker) {
+    return [
+        'category_id' => rand(1,10),
+        'user_id' => rand(1,10),
+        'comment_id' => rand(1,10),
+        'title' => $faker->sentence,
+        'description' => $faker->text,
+        'photo' => $faker->imageUrl,
+    ];
+    
 });
