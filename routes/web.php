@@ -18,3 +18,6 @@ Route::get('/category', 'CategoryController@allCategory');
 Route::get('/category/{id}', 'CategoryController@deleteCategory');
 Route::get('/editcategory/{id}', 'CategoryController@editCategory');
 Route::post('/update-category/{id}', 'CategoryController@updateCategory');
+
+//Post
+Route::get('/post', 'PostController@allPost');

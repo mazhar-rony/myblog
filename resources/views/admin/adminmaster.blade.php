@@ -8,6 +8,8 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Scripts -->
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -75,7 +77,7 @@
             </route-link>
           </li>
           <li class="nav-item">
-            <router-link to="/posts" class="nav-link">
+            <router-link to="/post-list" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Posts
