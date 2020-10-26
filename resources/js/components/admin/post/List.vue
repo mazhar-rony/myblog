@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="content">
+      <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -15,7 +15,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover table-responsive">
                   <thead>
                   <tr>
                     <th>Sl</th>
@@ -36,8 +36,9 @@
                     <td>{{ post.title | shortlength(20, "...") }}</td>
                     <td>{{ post.description | shortlength(50, "...") }}</td>
                     <td><img :src="post.photo" alt="" width="50" height="50"></td>
-                    <td>
+                    <td style="white-space: nowrap;">
                         <!-- <a><router-link :to = "`/edit-post/${post.id}`">Edit</router-link></a> | -->
+                        <a href="#">Edit</a> |
                         <a href="#">Delete</a>
                     </td>
                   </tr>

@@ -38,9 +38,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Post Image</label>
-                                        <input type="file" name="photo" 
+                                        <input @change="changePhoto($event)" type="file" name="photo" 
                                         class="form-control" id="photo" 
                                         :class="{ 'is-invalid': form.errors.has('photo') }">
+                                        <img v-if="form.photo" :src="form.photo" alt="post thumbnail" class="rounded" width="100" height="100">
                                         <has-error :form="form" field="photo"></has-error>
                                     </div>
                                     <!-- <div class="form-group">
@@ -90,7 +91,15 @@ export default {
       }
     },
     methods: {
-        
+        //filereader(https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload)
+        changePhoto(event) {
+            let file = event.target.files[0];
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                this.form.photo = e.target.result
+            };
+            reader.readAsDataURL(file);
+        }
     },
     
 }
@@ -98,5 +107,8 @@ export default {
 </script>
 
 <style scoped>
-
+    img {
+        margin-top: 8px;
+        
+    }
 </style>
