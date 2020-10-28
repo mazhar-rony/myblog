@@ -42,6 +42,15 @@ import filter from './filter'
  })*/
 //end moment js
 
+//https://vuejsexamples.com/vue-markdown-editor-component-for-vue-js/
+//editor support
+import 'v-markdown-editor/dist/v-markdown-editor.css'
+import Editor from 'v-markdown-editor'
+
+// global register
+Vue.use(Editor);
+
+
 //Sweet Alert 2
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'

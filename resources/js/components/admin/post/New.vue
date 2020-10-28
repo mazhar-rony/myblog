@@ -11,7 +11,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" enctype="multipart/form-data" @submit.prevent>
+                            <form role="form" enctype="multipart/form-data" @submit.prevent="addNewPost()">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="title">Post Title</label>
@@ -22,10 +22,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <textarea v-model="form.description" name="description" 
+                                        <!-- <textarea v-model="form.description" name="description" 
                                         class="form-control" id="description" rows="5"
                                         :class="{ 'is-invalid': form.errors.has('description') }" placeholder="Description">
-                                        </textarea>
+                                        </textarea> -->
+                                        <markdown-editor v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" name="description"></markdown-editor>
                                         <has-error :form="form" field="description"></has-error>
                                     </div>
                                     <div class="form-group">
@@ -37,9 +38,9 @@
                                         <has-error :form="form" field="category_id"></has-error>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Post Image</label>
-                                        <input @change="changePhoto($event)" type="file" name="photo" 
-                                        class="form-control" id="photo" 
+                                        <label for="photo">Post Image</label>
+                                        <input @change="changePhoto($event)" type="file" name="photo"
+                                        class="form-control" id="photo"
                                         :class="{ 'is-invalid': form.errors.has('photo') }">
                                         <img v-if="form.photo" :src="form.photo" alt="post thumbnail" class="rounded" width="100" height="100">
                                         <has-error :form="form" field="photo"></has-error>
@@ -57,7 +58,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                <button type="submit" @click="addCategory()" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -94,11 +95,37 @@ export default {
         //filereader(https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload)
         changePhoto(event) {
             let file = event.target.files[0];
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                this.form.photo = e.target.result
-            };
-            reader.readAsDataURL(file);
+            //console.log(file)
+            if(file.size > 1048576 || file.type.includes("image") == false) { // file size > 1024*1024 = 1048576
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'File must be an Image and not more than 1 MB !',
+                footer: '<a href>Why do I have this issue?</a>'
+                })
+            }else {
+                let reader = new FileReader();
+
+                reader.onload = (e) => {
+                    this.form.photo = e.target.result
+                    //console.log(e.target.result)
+                };
+                reader.readAsDataURL(file);
+                }
+        },
+        addNewPost() {
+            //console.log(this.form.description)
+            this.form.post('/savepost')
+                .then((response) => {
+                    this.$router.push('/post-list')
+                    Toast.fire({
+                    icon: 'success',
+                    title: 'New Post Added Successfully'
+                    })
+                })
+                .catch(() => {
+
+                })
         }
     },
     

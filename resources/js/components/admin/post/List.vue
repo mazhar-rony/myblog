@@ -35,11 +35,11 @@
                     <td v-else>undefined</td>
                     <td>{{ post.title | shortlength(20, "...") }}</td>
                     <td>{{ post.description | shortlength(50, "...") }}</td>
-                    <td><img :src="post.photo" alt="" width="50" height="50"></td>
+                    <td><img :src="postImage(post.photo)" alt="" width="50" height="50"></td>
+                    <!-- <td><img :src="'/uploadimage/'+post.photo" alt="" width="50" height="50"></td> -->
                     <td style="white-space: nowrap;">
-                        <!-- <a><router-link :to = "`/edit-post/${post.id}`">Edit</router-link></a> | -->
-                        <a href="#">Edit</a> |
-                        <a href="#">Delete</a>
+                        <a><router-link :to = "`/edit-post/${post.id}`">Edit</router-link></a> | |
+                        <a href="#" @click.prevent="deletePost(post.id)">Delete</a>
                     </td>
                   </tr>
                   </tbody>
@@ -61,6 +61,7 @@
 <script>
 export default {
     name: "List",
+    
     mounted() {
         this.$store.dispatch('getAllPost')
     },
@@ -70,7 +71,22 @@ export default {
         }
     },
     methods: {
+        postImage(img) {
+            return "uploadimage/" + img;
+        },
+        deletePost(id) {
+            axios.get('/delete/'+id)
+                this.$store.dispatch('getAllPost')
+                .then(() => {
+                    Toast.fire({
+                    icon: 'success',
+                    title: 'Post Deleted Successfully'
+            })
+                })
+                .catch(() => {
 
+                })
+        }
     }
 }
 </script>
