@@ -8,6 +8,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Scripts -->
     
     <!-- Fonts -->
@@ -24,8 +27,15 @@
   <!-- Navbar -->
     <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
 
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+      </ul>
+
       <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
+      {{--  <ul class="navbar-nav ml-auto">
 
 
           <li class="nav-item">
@@ -33,7 +43,7 @@
                   <i class="fa fa-th-large"></i>
               </a>
           </li>
-      </ul>
+      </ul>  --}}
     </nav>
   <!-- /.navbar -->
 
@@ -63,7 +73,7 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
+                {{--  <i class="right fas fa-angle-left"></i>  --}}
               </p>
             </router-link>
             

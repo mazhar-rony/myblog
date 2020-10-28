@@ -8,6 +8,10 @@ import PostList from './components/admin/post/List.vue'
 import EditPost from './components/admin/post/Edit.vue'
 import AddPost from './components/admin/post/New.vue'
 
+//FrontEnd Component
+import PublicHome from './components/public/PublicHome.vue'
+import BlogPost from './components/public/blog/BlogPost.vue'
+
 export default [
     { path: '/home', component: AdminHome },
     //Category
@@ -18,5 +22,9 @@ export default [
     { path: '/post-list', component: PostList },
     { path: '/add-post', component: AddPost },
     { path: '/edit-post/:postid', component: EditPost },
+
+    //FrontEnd Route
+    { path: '/', component: PublicHome },
+    { path: '/blog-post', component: BlogPost },
 
   ]
