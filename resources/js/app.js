@@ -72,6 +72,12 @@ const Toast = Swal.mixin({
 window.Toast = Toast;
 
 const router = new VueRouter({
+    
+    //scrollBehavior() used to show new Route Component Scroll from Top
+    scrollBehavior() {
+      return { x: 0, y: 0 };
+    },
+    
     routes: Routes, // short for `routes: routes`
     //mode: "history"
     mode: "hash"

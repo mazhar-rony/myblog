@@ -4,7 +4,9 @@ export default {
     state: {
         //category: "This is Category",
         category: [],
-        post: []
+        post: [],
+        blogpost: [],
+        singlePost: []
     },
     getters: {
         getCategory(state) {
@@ -12,6 +14,12 @@ export default {
         },
         getAllPost(state) {
             return state.post
+        },
+        getAllBlogPost(state) {
+            return state.blogpost
+        },
+        getSinglePost(state) {
+            return state.singlePost
         }
     },
     actions: {
@@ -19,13 +27,26 @@ export default {
             axios.get('/category')
                 .then((response)=>{
                     //console.log(response.data.categories)
-                    context.commit('categories', response.data.categories)//categories used in mutations
+                    context.commit('categories', response.data.categories)//categories used in mutations & categories comes from controller
                 })
         },
         getAllPost(context) {
             axios.get('/post')
                 .then((response)=>{
-                    context.commit('allPosts', response.data.posts)//allPosts used in mutations
+                    context.commit('allPosts', response.data.posts)//allPosts used in mutations & posts comes from controller
+                })
+        },
+        getAllBlogPost(context) {
+            axios.get('/blogpost')
+                .then((response)=>{
+                    context.commit('blogPosts', response.data.posts)//blogPosts used in mutations & posts comes from controller
+                })
+        },
+        getPostById(context, payload) {
+            axios.get('/singlepost/'+payload)
+                .then((response) => {
+                    //console.log(response.data.post)
+                    context.commit('singlePost', response.data.post)//singlePost used in mutations & post comes from controller
                 })
         }
     },
@@ -35,6 +56,12 @@ export default {
         },
         allPosts(state, payload) {
             return state.post = payload
+        },
+        blogPosts(state, payload) {
+            return state.blogpost = payload
+        },
+        singlePost(state, payload) {
+            return state.singlePost = payload
         }
     }
 }

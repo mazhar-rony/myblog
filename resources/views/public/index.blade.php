@@ -276,9 +276,9 @@
                 <div class="span3">
                     <div class="widget">
                     <h5 class="widgetheading">Flickr photostream</h5>
-                    <div class="flickr_badge">
+                    {{--  <div class="flickr_badge">
                         <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=8&amp;display=random&amp;size=s&amp;layout=x&amp;source=user&amp;user=34178660@N03"></script>
-                    </div>
+                    </div>  --}}
                     <div class="clear">
                     </div>
                     </div>
@@ -339,7 +339,7 @@
    
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="{{asset("assets/public/asset/js")}}/jquery.js"></script>
-  <script src="{{asset("assets/public/asset/js")}}/jquery.easing.1.3.js"></script>
+  {{--  <script src="{{asset("assets/public/asset/js")}}/jquery.easing.1.3.js"></script>  --}}
   <script src="{{asset("assets/public/asset/js")}}/bootstrap.js"></script>
   <script src="{{asset("assets/public/asset/js")}}/jcarousel/jquery.jcarousel.min.js"></script>
   <script src="{{asset("assets/public/asset/js")}}/jquery.fancybox.pack.js"></script>

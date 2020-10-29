@@ -11,8 +11,10 @@ import AddPost from './components/admin/post/New.vue'
 //FrontEnd Component
 import PublicHome from './components/public/PublicHome.vue'
 import BlogPost from './components/public/blog/BlogPost.vue'
+import SinglePost from './components/public/blog/SingleBlog.vue'
 
 export default [
+  
     { path: '/home', component: AdminHome },
     //Category
     { path: '/category-list', component: CategoryList },
@@ -26,5 +28,6 @@ export default [
     //FrontEnd Route
     { path: '/', component: PublicHome },
     { path: '/blog-post', component: BlogPost },
+    { path: '/blog/:id', component: SinglePost },
 
   ]
