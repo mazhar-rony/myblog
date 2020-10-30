@@ -6,7 +6,9 @@ export default {
         category: [],
         post: [],
         blogpost: [],
-        singlePost: []
+        singlePost: [],
+        allCategories: [],
+        latestpost: []
     },
     getters: {
         getCategory(state) {
@@ -20,6 +22,12 @@ export default {
         },
         getSinglePost(state) {
             return state.singlePost
+        },
+        getAllCategories(state) {
+            return state.allCategories
+        },
+        getLatestPost(state) {
+            return state.latestpost
         }
     },
     actions: {
@@ -48,6 +56,28 @@ export default {
                     //console.log(response.data.post)
                     context.commit('singlePost', response.data.post)//singlePost used in mutations & post comes from controller
                 })
+        },
+        // here Categories for user panel
+        allCategories(context) {
+            axios.get('/categories')
+                .then((response)=>{
+                    context.commit('allcategories', response.data.categories)//allcategories used in mutations & categories comes from controller
+                })
+        },
+        latestPost(context) {
+            axios.get('/latestpost')
+                .then((response)=>{
+                    context.commit('latestpost', response.data.posts)
+                })
+        },
+        getPostByCatId(context, payload) {
+            axios.get('/category/'+payload)
+                .then((response) => {
+                    //console.log(payload)
+                    console.log(response.data.posts)
+                    //context.commit('getPostByCatId', response.data.posts)
+                    context.commit('blogPosts', response.data.posts)
+                })
         }
     },
     mutations: {
@@ -62,6 +92,15 @@ export default {
         },
         singlePost(state, payload) {
             return state.singlePost = payload
+        },
+        allcategories(state, payload) {
+            return state.allCategories = payload
+        },
+        latestpost(state, payload) {
+            return state.latestpost = payload
         }
+        // getPostByCatId(state, payload) {
+        //     return state.blogPosts = payload
+        // }
     }
 }

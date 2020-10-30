@@ -29,5 +29,6 @@ export default [
     { path: '/', component: PublicHome },
     { path: '/blog-post', component: BlogPost },
     { path: '/blog/:id', component: SinglePost },
+    { path: '/categories/:id', component: BlogPost },
 
   ]

@@ -47,7 +47,7 @@ export default {
         BlogSidebar
     },
     mounted() {
-        this.$store.dispatch('getPostById', this.$route.params.id)
+        this.showSinglePost()
     },
     computed: {
         singlepost() {
@@ -55,7 +55,14 @@ export default {
         }
     },
     methods: {
-        
+        showSinglePost() {
+          this.$store.dispatch('getPostById', this.$route.params.id)
+        }
+    },
+    watch: {
+      $route(to, from) {
+        this.showSinglePost()
+      }
     }
 }
 </script>

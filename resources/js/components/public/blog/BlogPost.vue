@@ -86,7 +86,19 @@ export default {
         }
     },
     methods: {
-        
+        categoryWisePost() {
+            //routes between all blogs and category wise blog
+            if(this.$route.params.id != null) {
+                this.$store.dispatch('getPostByCatId', this.$route.params.id)              
+            }else {
+                this.$store.dispatch('getAllBlogPost')
+            }
+        }
+    },
+    watch: {
+        $route(to, from) {
+            this.categoryWisePost()
+        }
     }
     
 }
