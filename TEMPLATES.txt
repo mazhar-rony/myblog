@@ -1,0 +1,4 @@
+https://github.com/ColorlibHQ/AdminLTE/releases
+
+
+npm install admin-lte@v3.0.5 --save
