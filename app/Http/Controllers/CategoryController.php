@@ -60,4 +60,19 @@ class CategoryController extends Controller
             'cat_name' => $request->cat_name
         ]);
     }
+
+    public function selectedCategory($ids)
+    {
+        $all_id = explode(',', $ids);
+
+        //print_r($all_id);
+
+        foreach($all_id as $id)
+        {
+            $category = Category::find($id);
+            $category->delete();
+        }
+       
+        
+    }
 }

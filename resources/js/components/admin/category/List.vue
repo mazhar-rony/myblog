@@ -18,6 +18,16 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>
+                      <input type="checkbox" v-model="selectedAll" @click="selectAll">
+                        <span v-if="selectedAll == false"> Check All</span>
+                        <span v-else> Uncheck All</span>
+                      
+                      <select name="" id="" v-model="select" @change="deleteSelected">
+                        <option value="">Select</option>
+                        <option value="">Delete All</option>
+                      </select>
+                    </th>
                     <th>Id</th>
                     <th>Category Name</th>
                     <th>Date</th>
@@ -26,6 +36,7 @@
                   </thead>
                   <tbody>
                   <tr v-for="(category, index) in getAllCategory" v-bind:key="category.id">
+                    <td><input type="checkbox" :value="category.id" v-model="categoryItem"></td>
                     <td>{{ index+1 }}</td>
                     <td>{{ category.cat_name }}</td>
                     <td>{{ category.created_at | dateformat }}</td>
@@ -53,6 +64,14 @@
 <script>
 export default {
     name: "List",
+
+    data() {
+      return {
+        categoryItem: [],
+        select: '',
+        selectedAll: false
+      }
+    },
     mounted() {
       this.$store.dispatch('allCategory')
     },
@@ -72,6 +91,37 @@ export default {
             title: 'Category Deleted Successfully'
             })
           })
+      },
+      deleteSelected() {
+        //alert(this.categoryItem)
+        axios.get('/deletecategory/' + this.categoryItem)
+            .then(() => {
+                this.categoryItem = []
+                this.$store.dispatch('allCategory')
+                Toast.fire({
+                icon: 'success',
+                title: 'Category Deleted Successfully'
+                })
+            })
+      },
+      selectAll() {
+
+          if(this.selectedAll == false) 
+          {
+              this.selectedAll = true
+
+              for(var category in this.getAllCategory)
+              {
+                  this.categoryItem.push(this.getAllCategory[category].id)
+              }
+              //alert(this.categoryItem)
+          }
+          else
+          {
+              this.selectedAll = false
+              this.categoryItem = []
+          }
+          
       }
     }
 }

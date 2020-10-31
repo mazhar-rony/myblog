@@ -4,8 +4,8 @@
                 <aside class="right-sidebar">
                 <div class="widget">
                     <form class="form-search">
-                    <input placeholder="Type something" type="text" class="input-medium search-query">
-                    <button type="submit" class="btn btn-square btn-theme">Search</button>
+                    <input @keyup="realSearch" placeholder="Type something" v-model="keyword" type="text" class="input-medium search-query">
+                    <button type="submit" @click.prevent="realSearch" class="btn btn-square btn-theme">Search</button>
                     </form>
                 </div>
                 <div class="widget">
@@ -48,9 +48,17 @@
 </template>
 
 <script>
+
+import _ from 'lodash'
+
 export default {
     name: "BlogSidebar",
     
+    data() {
+        return {
+            keyword: ''
+        }
+    },
     mounted() {
         this.$store.dispatch('allCategories')
         this.$store.dispatch('latestPost')
@@ -62,6 +70,14 @@ export default {
         latestpost() {
             return this.$store.getters.getLatestPost
         }
+    },
+    methods: {
+        // realSearch() {
+        //     this.$store.dispatch('searchPost', this.keyword)
+        // },
+        realSearch:_.debounce(function() {
+            this.$store.dispatch('searchPost', this.keyword)
+        }, 1000)
     }
 }
 </script>
